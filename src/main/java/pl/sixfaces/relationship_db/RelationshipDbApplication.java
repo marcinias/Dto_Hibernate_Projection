@@ -19,18 +19,18 @@ public class RelationshipDbApplication implements CommandLineRunner {
     RepoBackpack repoBackpack;
     RepoNote repoNote;
     RepoProf repoProf;
-    RepoRoom  repoRoom;
+    RepoRoom repoRoom;
+    RepoCleaner repoCleaner;
 
-    public RelationshipDbApplication(RepoStudent repoStudent, RepoBackpack repoBackpack, RepoNote repoNote, RepoProf repoProf, RepoRoom repoRoom) {
+    @Autowired
+    public RelationshipDbApplication(RepoStudent repoStudent, RepoBackpack repoBackpack, RepoNote repoNote, RepoProf repoProf, RepoRoom repoRoom, RepoCleaner repoCleaner) {
         this.repoStudent = repoStudent;
         this.repoBackpack = repoBackpack;
         this.repoNote = repoNote;
         this.repoProf = repoProf;
         this.repoRoom = repoRoom;
+        this.repoCleaner = repoCleaner;
     }
-
-    @Autowired
-
 
 
     public static void main(String[] args) {
@@ -74,15 +74,17 @@ public class RelationshipDbApplication implements CommandLineRunner {
         student02.setBackpack(backpack02);
 
 
-
         Profesor profesor01 = new Profesor("prof", "nazwisko");
         Profesor profesor02 = new Profesor("prdvof", "dvnazwisko");
         Profesor profesor03 = new Profesor("prdvvnof", "dvnavnzwisko");
 
 
-        Room room01 = new Room(2312,"muzyka");
-        Room room02 = new Room(1212,"IT");
+        Room room01 = new Room(2312, "muzyka");
+        Room room02 = new Room(1212, "IT");
+        Room room03 = new Room(5212, "wos");
 
+        Cleaner cleaner01 = new Cleaner("Jas", "Kowalski");
+        Cleaner cleaner02 = new Cleaner("Karolina", "Lesniacka");
 
         student01.add(profesor01);
         student02.add(profesor03);
@@ -90,9 +92,9 @@ public class RelationshipDbApplication implements CommandLineRunner {
         student02.add(profesor02);
 
 
-
         repoRoom.save(room01);
         repoRoom.save(room02);
+        repoRoom.save(room03);
 
         profesor01.setRoom(room01);
         profesor02.setRoom(room02);
@@ -106,15 +108,13 @@ public class RelationshipDbApplication implements CommandLineRunner {
         repoStudent.save(student01);
         repoStudent.save(student02);
 
+        cleaner01.add(room01);
+        cleaner02.add(room02);
+        cleaner02.add(room03);
 
 
-
-
-
-
-
-
-
+        repoCleaner.save(cleaner01);
+        repoCleaner.save(cleaner02);
 
 
     }
