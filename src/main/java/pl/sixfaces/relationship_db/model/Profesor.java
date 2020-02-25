@@ -34,6 +34,12 @@ public class Profesor {
     private List<Student> studentList;
 
 
+    @OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @JoinColumn(name = "room_id")
+    private  Room room;
+
+
+
     public Profesor(String name, String surname) {
         this.name = name;
         this.surname = surname;

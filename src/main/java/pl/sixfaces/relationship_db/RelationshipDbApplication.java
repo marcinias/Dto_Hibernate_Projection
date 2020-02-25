@@ -5,14 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import pl.sixfaces.relationship_db.model.Backpack;
-import pl.sixfaces.relationship_db.model.Note;
-import pl.sixfaces.relationship_db.model.Profesor;
-import pl.sixfaces.relationship_db.model.Student;
-import pl.sixfaces.relationship_db.repository.RepoBackpack;
-import pl.sixfaces.relationship_db.repository.RepoNote;
-import pl.sixfaces.relationship_db.repository.RepoProf;
-import pl.sixfaces.relationship_db.repository.RepoStudent;
+import pl.sixfaces.relationship_db.model.*;
+import pl.sixfaces.relationship_db.repository.*;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -25,14 +19,19 @@ public class RelationshipDbApplication implements CommandLineRunner {
     RepoBackpack repoBackpack;
     RepoNote repoNote;
     RepoProf repoProf;
+    RepoRoom  repoRoom;
 
-    @Autowired
-    public RelationshipDbApplication(RepoStudent repoStudent, RepoBackpack repoBackpack, RepoNote repoNote, RepoProf repoProf) {
+    public RelationshipDbApplication(RepoStudent repoStudent, RepoBackpack repoBackpack, RepoNote repoNote, RepoProf repoProf, RepoRoom repoRoom) {
         this.repoStudent = repoStudent;
         this.repoBackpack = repoBackpack;
         this.repoNote = repoNote;
         this.repoProf = repoProf;
+        this.repoRoom = repoRoom;
     }
+
+    @Autowired
+
+
 
     public static void main(String[] args) {
         SpringApplication.run(RelationshipDbApplication.class, args);
@@ -51,9 +50,6 @@ public class RelationshipDbApplication implements CommandLineRunner {
         Note note2 = new Note("Zeszyt z informatyki ");
         Note note3 = new Note("Zeszyt z histori ");
         Note note4 = new Note("Zeszyt z polskiego  ");
-
-
-
 
         backpack01.add(note1);
         backpack02.add(note2);
@@ -84,7 +80,8 @@ public class RelationshipDbApplication implements CommandLineRunner {
         Profesor profesor03 = new Profesor("prdvvnof", "dvnavnzwisko");
 
 
-
+        Room room01 = new Room(2312,"muzyka");
+        Room room02 = new Room(1212,"IT");
 
 
         student01.add(profesor01);
@@ -93,6 +90,14 @@ public class RelationshipDbApplication implements CommandLineRunner {
         student02.add(profesor02);
 
 
+
+        repoRoom.save(room01);
+        repoRoom.save(room02);
+
+        profesor01.setRoom(room01);
+        profesor02.setRoom(room02);
+        profesor03.setRoom(room02);
+
         repoProf.save(profesor01);
         repoProf.save(profesor02);
         repoProf.save(profesor03);
@@ -100,6 +105,16 @@ public class RelationshipDbApplication implements CommandLineRunner {
 
         repoStudent.save(student01);
         repoStudent.save(student02);
+
+
+
+
+
+
+
+
+
+
 
 
     }
