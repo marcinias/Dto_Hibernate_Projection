@@ -24,13 +24,13 @@ public class Room {
     private  String nameRoom;
 
 
-    @ManyToMany
-    @JoinTable(
+    @ManyToMany(mappedBy = "roomList")
+  /*  @JoinTable(
             name = "id_room_id_cleaner",
             joinColumns = @JoinColumn(name = "id_room"),
             inverseJoinColumns = @JoinColumn(name = "id_cleaner")
 
-    )
+    )*/
     private List<Cleaner> cleanersList;
 
 

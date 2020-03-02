@@ -21,12 +21,12 @@ public class Cleaner {
     private String surname;
 
     @ManyToMany
-    @JoinTable(
+  /*  @JoinTable(
             name = "id_room_id_cleaner",
             joinColumns = @JoinColumn(name = "id_cleaner"),
             inverseJoinColumns = @JoinColumn(name = "id_room")
 
-    )
+    )*/
     private List<Room> roomList;
 
     public Cleaner(String name, String surname) {

@@ -23,18 +23,19 @@ public class Profesor {
     private Long id_prof;
     private String name;
     private String surname;
-    //@ManyToMany  //bykowski
-    @ManyToMany
-    @JoinTable(
+
+   // @ManyToMany(fetch = FetchType.EAGER)
+     /*   @JoinTable(
             name = "id_student_id_prof",
             joinColumns = @JoinColumn(name = "id_prof"),
             inverseJoinColumns = @JoinColumn(name = "id_student")
 
-    )
+    )*/
+    @ManyToMany (mappedBy = "profesorList")
     private List<Student> studentList;
 
 
-    @OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JoinColumn(name = "room_id")
     private  Room room;
 

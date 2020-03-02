@@ -25,23 +25,20 @@ public class Student {
     private String surname;
     private String groupNumber;
 
-    //@ManyToMany(mappedBy = "studentList") // bykowki
-
-    @ManyToMany
-    @JoinTable(
+  /* @JoinTable(
             name = "id_student_id_prof",
             joinColumns = @JoinColumn(name = "id_student"),
             inverseJoinColumns = @JoinColumn(name = "id_prof")
 
-    )
+    )*/
+
+    @ManyToMany
     private List<Profesor> profesorList;
 
 
-     @OneToOne(cascade = CascadeType.REMOVE, orphanRemoval = true)
+     @OneToOne(  cascade = CascadeType.REMOVE, orphanRemoval = true)
      @JoinColumn(name = "back_pack_id")
      private  Backpack backpack;
-
-
 
 
     public Student(String name, String surname, String groupNumber) {
@@ -56,4 +53,11 @@ public class Student {
         }
         profesorList.add(profesor);
     }
+
+
+
+
+
+
+
 }
