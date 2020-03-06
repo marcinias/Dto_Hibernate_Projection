@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
+ @Entity
 public class Room {
 
 
@@ -24,13 +24,15 @@ public class Room {
     private  String nameRoom;
 
 
-    @ManyToMany(mappedBy = "roomList")
+
   /*  @JoinTable(
             name = "id_room_id_cleaner",
             joinColumns = @JoinColumn(name = "id_room"),
             inverseJoinColumns = @JoinColumn(name = "id_cleaner")
 
     )*/
+
+    @ManyToMany(mappedBy = "roomList")
     private List<Cleaner> cleanersList;
 
 

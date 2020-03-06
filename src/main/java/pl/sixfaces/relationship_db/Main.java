@@ -1,13 +1,17 @@
 package pl.sixfaces.relationship_db;
 
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pl.sixfaces.relationship_db.model.*;
 import pl.sixfaces.relationship_db.repository.*;
 
+import java.util.List;
+
 @Component
 public class Main {
+    RepoNote repoNote;
 
 
     @Autowired
@@ -19,10 +23,38 @@ public class Main {
         Backpack backpack03 = new Backpack("4F");
 
 
+        repoBackpack.save(backpack01);
+        repoBackpack.save(backpack02);
+        repoBackpack.save(backpack03);
+
+
         Note note1 = new Note("Zeszyt z religji");
         Note note2 = new Note("Zeszyt z informatyki ");
         Note note3 = new Note("Zeszyt z histori ");
         Note note4 = new Note("Zeszyt z polskiego  ");
+
+//      backpack01.add(note1);
+//      backpack02.add(note2);
+//      backpack03.add(note3);
+//      backpack03.add(note4);
+
+
+        note1.setBackpackId(backpack02);
+        note2.setBackpackId(backpack01);
+        note4.setBackpackId(backpack03);
+        note3.setBackpackId(backpack03);
+
+
+        repoNote.save(note1);
+        repoNote.save(note2);
+        repoNote.save(note3);
+        repoNote.save(note4);
+
+
+        repoBackpack.save(backpack01);
+        repoBackpack.save(backpack02);
+        repoBackpack.save(backpack03);
+
 
         backpack01.add(note1);
         backpack02.add(note2);
@@ -30,9 +62,10 @@ public class Main {
         backpack03.add(note4);
 
 
-        repoBackpack.save(backpack01);
-        repoBackpack.save(backpack02);
-        repoBackpack.save(backpack03);
+        note1.setBackpackId(backpack02);
+        note2.setBackpackId(backpack01);
+        note4.setBackpackId(backpack03);
+        note3.setBackpackId(backpack03);
 
 
         repoNote.save(note1);
@@ -43,7 +76,7 @@ public class Main {
 
         Student student01 = new Student("Karol", "Blebus", "67276");
         Student student02 = new Student("Szczepan", "Kondzior", "342576");
-        student01.setBackpack(backpack01);
+        student01.setBackpack(backpack03);
         student02.setBackpack(backpack02);
 
 
@@ -60,28 +93,24 @@ public class Main {
         Cleaner cleaner02 = new Cleaner("Karolina", "Lesniacka");
 
 
-
-
         repoRoom.save(room01);
         repoRoom.save(room02);
         repoRoom.save(room03);
 
-        profesor01.setRoom(room01);
-        profesor02.setRoom(room02);
-        profesor03.setRoom(room02);
+        profesor01.setRoomID(room01);
+        profesor02.setRoomID(room02);
+        profesor03.setRoomID(room02);
 
 
-
-
-
-
-     student01.add(profesor01);
+        student01.add(profesor01);
         student02.add(profesor03);
         student02.add(profesor01);
         student02.add(profesor02);
 
-      /*  profesor01.add(student02);
-        profesor01.add(student01);*/
+
+        profesor01.add(student02);
+        profesor01.add(student01);
+
 
         repoProf.save(profesor01);
         repoProf.save(profesor02);
@@ -89,9 +118,6 @@ public class Main {
 
         repoStudent.save(student01);
         repoStudent.save(student02);
-
-
-
 
 
         cleaner01.add(room01);
@@ -102,22 +128,18 @@ public class Main {
         repoCleaner.save(cleaner01);
         repoCleaner.save(cleaner02);
 
-        // repoStudent.deleteById(1L);
-
-     /* System.out.println("buu-------------");
-         List<Student> blebus = repoStudent.findStudentBySurnameIs("Blebus");
-           if(blebus != null){
-               System.out.println("not null------------------");
-               System.out.println(blebus.get(0).getName() );
-
-           }
-    }*/
+        //repoStudent.deleteById(1L);
 
 
+     /*   System.out.println("buu-------------");
+        List<Student> blebus = repoStudent.findStudentBySurnameIs("Blebus");
+        if (blebus != null) {
+            System.out.println("not null------------------");
+            System.out.println(blebus.get(0).getName());
 
+        }*/
 
 
     }
-
 
 }

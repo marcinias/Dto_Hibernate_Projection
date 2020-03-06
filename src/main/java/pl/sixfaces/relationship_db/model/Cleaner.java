@@ -11,7 +11,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
+ @Entity
 public class Cleaner {
 
     @Id
@@ -20,13 +20,14 @@ public class Cleaner {
     private String name;
     private String surname;
 
-    @ManyToMany
+
   /*  @JoinTable(
             name = "id_room_id_cleaner",
             joinColumns = @JoinColumn(name = "id_cleaner"),
             inverseJoinColumns = @JoinColumn(name = "id_room")
 
     )*/
+    @ManyToMany
     private List<Room> roomList;
 
     public Cleaner(String name, String surname) {

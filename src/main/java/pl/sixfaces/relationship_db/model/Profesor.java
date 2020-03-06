@@ -1,6 +1,9 @@
 package pl.sixfaces.relationship_db.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,13 +11,14 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
-
+/*@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id_prof")*/
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
+ @Entity
 public class Profesor {
 
 
@@ -23,7 +27,8 @@ public class Profesor {
     private Long id_prof;
     private String name;
     private String surname;
-
+    
+    // old udemy version
    // @ManyToMany(fetch = FetchType.EAGER)
      /*   @JoinTable(
             name = "id_student_id_prof",
@@ -31,13 +36,17 @@ public class Profesor {
             inverseJoinColumns = @JoinColumn(name = "id_student")
 
     )*/
+    @JsonIgnore
     @ManyToMany (mappedBy = "profesorList")
     private List<Student> studentList;
 
+  // old udemy version
+  /*  @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, orphanRemoval = true)
+    @JoinColumn(name = "room_id")*/
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, orphanRemoval = true)
-    @JoinColumn(name = "room_id")
-    private  Room room;
+    @JsonIgnore
+    @OneToOne(cascade = CascadeType.REMOVE)
+    private  Room roomID;
 
 
 
@@ -54,4 +63,43 @@ public class Profesor {
         studentList.add(student);
     }
 
+    public Long getId_prof() {
+        return id_prof;
+    }
+
+    public void setId_prof(Long id_prof) {
+        this.id_prof = id_prof;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public List<Student> getStudentList() {
+        return studentList;
+    }
+
+    public void setStudentList(List<Student> studentList) {
+        this.studentList = studentList;
+    }
+
+    public Room getRoomID() {
+        return roomID;
+    }
+
+    public void setRoomID(Room room) {
+        this.roomID = room;
+    }
 }

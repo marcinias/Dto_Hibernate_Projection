@@ -21,10 +21,11 @@ public class Backpack {
     private Long id;
     private String mark;
    // unidirectional   1-way
-      @OneToMany(cascade = CascadeType.ALL)
-      @JoinColumn(name = "back_pack_id")
+     /* @OneToMany(cascade = CascadeType.ALL)
+      @JoinColumn(name = "back_pack_id")*/
+
    //  bidirectional  2-way
-   // @OneToMany(mappedBy =  "backpack" )
+   @OneToMany(mappedBy =  "backpackId",cascade = CascadeType.REMOVE)
     private List<Note> noteList;
 
 
