@@ -1,21 +1,16 @@
-package pl.sixfaces.relationship_db;
-
+package pl.sixfaces.relationship_db.model;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import pl.sixfaces.relationship_db.model.*;
-import pl.sixfaces.relationship_db.repository.*;
-
-import java.util.List;
 
 @Component
-public class Main {
-    RepoNote repoNote;
+public class Warmup {
+    NoteRepo noteRepo;
 
 
     @Autowired
-    public Main(RepoStudent repoStudent, RepoBackpack repoBackpack, RepoNote repoNote, RepoProf repoProf, RepoRoom repoRoom, RepoCleaner repoCleaner) {
+    public Warmup(RepoStudent repoStudent, RepoBackpack repoBackpack, NoteRepo noteRepo, RepoProf repoProf, RepoRoom repoRoom, RepoCleaner repoCleaner) {
 
 
         Backpack backpack01 = new Backpack("Nike");
@@ -45,10 +40,10 @@ public class Main {
         note3.setBackpackId(backpack03);
 
 
-        repoNote.save(note1);
-        repoNote.save(note2);
-        repoNote.save(note3);
-        repoNote.save(note4);
+        noteRepo.save(note1);
+        noteRepo.save(note2);
+        noteRepo.save(note3);
+        noteRepo.save(note4);
 
 
         repoBackpack.save(backpack01);
@@ -68,10 +63,10 @@ public class Main {
         note3.setBackpackId(backpack03);
 
 
-        repoNote.save(note1);
-        repoNote.save(note2);
-        repoNote.save(note3);
-        repoNote.save(note4);
+        noteRepo.save(note1);
+        noteRepo.save(note2);
+        noteRepo.save(note3);
+        noteRepo.save(note4);
 
 
         Student student01 = new Student("Karol", "Blebus", "67276");
@@ -80,9 +75,9 @@ public class Main {
         student02.setBackpack(backpack02);
 
 
-        Profesor profesor01 = new Profesor("prof", "nazwisko");
-        Profesor profesor02 = new Profesor("prdvof", "dvnazwisko");
-        Profesor profesor03 = new Profesor("prdvvnof", "dvnavnzwisko");
+        Professor professor01 = new Professor("prof", "nazwisko");
+        Professor professor02 = new Professor("prdvof", "dvnazwisko");
+        Professor professor03 = new Professor("prdvvnof", "dvnavnzwisko");
 
 
         Room room01 = new Room(2312, "muzyka");
@@ -97,24 +92,24 @@ public class Main {
         repoRoom.save(room02);
         repoRoom.save(room03);
 
-        profesor01.setRoomID(room01);
-        profesor02.setRoomID(room02);
-        profesor03.setRoomID(room02);
+        professor01.setRoomID(room01);
+        professor02.setRoomID(room02);
+        professor03.setRoomID(room02);
 
 
-        student01.add(profesor01);
-        student02.add(profesor03);
-        student02.add(profesor01);
-        student02.add(profesor02);
+        student01.add(professor01);
+        student02.add(professor03);
+        student02.add(professor01);
+        student02.add(professor02);
 
 
-        profesor01.add(student02);
-        profesor01.add(student01);
+        professor01.add(student02);
+        professor01.add(student01);
 
 
-        repoProf.save(profesor01);
-        repoProf.save(profesor02);
-        repoProf.save(profesor03);
+        repoProf.save(professor01);
+        repoProf.save(professor02);
+        repoProf.save(professor03);
 
         repoStudent.save(student01);
         repoStudent.save(student02);

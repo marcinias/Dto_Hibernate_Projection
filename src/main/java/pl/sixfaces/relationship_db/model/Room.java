@@ -12,16 +12,15 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
- @Entity
+@Entity
 public class Room {
-
 
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id_room;
     private int numberRoom;
-    private  String nameRoom;
+    private String nameRoom;
 
 
 

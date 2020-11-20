@@ -18,8 +18,8 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
- @Entity
-public class Profesor {
+@Entity
+public class Professor {
 
 
     @Id
@@ -27,9 +27,9 @@ public class Profesor {
     private Long id_prof;
     private String name;
     private String surname;
-    
+
     // old udemy version
-   // @ManyToMany(fetch = FetchType.EAGER)
+    // @ManyToMany(fetch = FetchType.EAGER)
      /*   @JoinTable(
             name = "id_student_id_prof",
             joinColumns = @JoinColumn(name = "id_prof"),
@@ -37,20 +37,19 @@ public class Profesor {
 
     )*/
     @JsonIgnore
-    @ManyToMany (mappedBy = "profesorList")
+    @ManyToMany(mappedBy = "professorList")
     private List<Student> studentList;
 
-  // old udemy version
+    // old udemy version
   /*  @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, orphanRemoval = true)
     @JoinColumn(name = "room_id")*/
 
     @JsonIgnore
     @OneToOne(cascade = CascadeType.REMOVE)
-    private  Room roomID;
+    private Room roomID;
 
 
-
-    public Profesor(String name, String surname) {
+    public Professor(String name, String surname) {
         this.name = name;
         this.surname = surname;
 

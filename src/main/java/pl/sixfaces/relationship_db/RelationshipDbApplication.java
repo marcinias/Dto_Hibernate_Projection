@@ -19,11 +19,10 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
 @EnableJpaAuditing
 @SpringBootApplication
-public class RelationshipDbApplication   {
-
-
+public class RelationshipDbApplication {
 
 
     public static void main(String[] args) {

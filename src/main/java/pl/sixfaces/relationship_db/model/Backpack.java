@@ -1,31 +1,26 @@
 package pl.sixfaces.relationship_db.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import static java.util.stream.Collectors.toList;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import pl.sixfaces.relationship_db.model.dto.BackpackDto;
 
-
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
-public class Backpack {
+ class Backpack {
 
 
-   @Id
-   @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String mark;
-   // unidirectional   1-way
+    // unidirectional   1-way
      /* @OneToMany(cascade = CascadeType.ALL)
       @JoinColumn(name = "back_pack_id")*/
 
-   //  bidirectional  2-way
-   @OneToMany(mappedBy =  "backpackId",cascade = CascadeType.REMOVE)
+    //  bidirectional  2-way
+    @OneToMany(mappedBy = "backpackId", cascade = CascadeType.REMOVE)
     private List<Note> noteList;
 
 
@@ -33,13 +28,42 @@ public class Backpack {
         this.mark = mark;
     }
 
-   //  unidirectional   1-way  method
+  public Backpack() {
+  }
 
-  public void add(Note note) {
+  //  unidirectional   1-way  method
+
+    public void add(Note note) {
         if (noteList == null) {
             noteList = new ArrayList<>();
         }
         noteList.add(note);
     }
+
+
+
+  public Long getId() {
+    return id;
+  }
+
+  public void setId(Long id) {
+    this.id = id;
+  }
+
+  public String getMark() {
+    return mark;
+  }
+
+  public void setMark(String mark) {
+    this.mark = mark;
+  }
+
+  public List<Note> getNoteList() {
+    return noteList;
+  }
+
+
+
+
 
 }

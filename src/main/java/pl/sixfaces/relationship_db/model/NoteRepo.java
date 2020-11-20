@@ -1,8 +1,9 @@
-package pl.sixfaces.relationship_db.repository;
+package pl.sixfaces.relationship_db.model;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import pl.sixfaces.relationship_db.model.Note;
+
 @Repository
-public interface RepoNote extends JpaRepository<Note,Long> {
+ public interface NoteRepo extends JpaRepository<Note, Long> {
 }
